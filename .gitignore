@@ -1,0 +1,15 @@
+# Dependências
+node_modules/
+
+# Variáveis de ambiente (NUNCA suba isso!)
+.env
+
+# Banco de dados e transcripts (serão persistidos pelo Railway Volume)
+database/
+
+# Logs
+*.log
+
+# Sistema
+.DS_Store
+Thumbs.db

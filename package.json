@@ -1,0 +1,19 @@
+{
+  "name": "Orynthium Atrium: Tickets",
+  "version": "10.0.0",
+  "description": "O melhor sistema de tickets para Discord — com slash commands, painel visual, dashboard web e transcripts completos.",
+  "main": "src/index.js",
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js"
+  },
+  "dependencies": {
+    "discord.js": "^14.19.3",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "socket.io": "^4.8.1"
+  }
+}

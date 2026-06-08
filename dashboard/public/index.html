@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Cyber-bot: Ticket — Dashboard</title>
+  <link rel="stylesheet" href="/styles.css"/>
+</head>
+<body>
+  <div class="bg-grid"></div>
+
+  <div id="login-screen" class="login-screen">
+    <div class="login-card">
+      <img src="/banner.png" alt="Cyber-bot: Tickets" class="login-banner"/>
+      <form id="loginForm">
+        <div class="field">
+          <label>Guild ID</label>
+          <input id="guildInput" placeholder="Ex: 1234567890123456789" autocomplete="off"/>
+        </div>
+        <div class="field">
+          <label>Chave de Acesso (DASHBOARD_KEY)</label>
+          <input id="keyInput" type="password" placeholder="Sua dashboard key"/>
+        </div>
+        <button type="submit" class="btn-primary" id="loadBtn">Acessar Dashboard</button>
+        <p id="loginError" class="error-msg" style="display:none"></p>
+      </form>
+    </div>
+  </div>
+
+  <div id="app" style="display:none">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <span class="logo">🎟️</span>
+        <div>
+          <div class="sidebar-title">Cyber Tickets</div>
+          <div id="botTag" class="sidebar-sub"></div>
+        </div>
+      </div>
+      <nav>
+        <button class="nav-item active" data-tab="overview">📊 Visão Geral</button>
+        <button class="nav-item" data-tab="tickets">🎫 Tickets</button>
+        <button class="nav-item" data-tab="config">⚙️ Configurações</button>
+        <button class="nav-item" data-tab="audit">📋 Audit Log</button>
+      </nav>
+      <div class="sidebar-guild">
+        <div id="guildName" class="guild-name"></div>
+        <div id="guildId" class="guild-id"></div>
+        <button class="btn-logout" id="logoutBtn">Sair</button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <!-- Overview Tab -->
+      <div id="tab-overview" class="tab active">
+        <div class="page-header">
+          <h2>📊 Visão Geral</h2>
+          <button class="btn-refresh" id="refreshBtn">🔄 Atualizar</button>
+        </div>
+        <div class="stats-grid" id="statsGrid"></div>
+        <div class="cards-row">
+          <div class="card">
+            <h3>Por Categoria</h3>
+            <div id="byCategory" class="category-list"></div>
+          </div>
+          <div class="card">
+            <h3>Top Atendentes</h3>
+            <div id="topStaff" class="staff-list"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tickets Tab -->
+      <div id="tab-tickets" class="tab">
+        <div class="page-header">
+          <h2>🎫 Tickets</h2>
+          <div class="filter-row">
+            <select id="statusFilter">
+              <option value="">Todos</option>
+              <option value="open">Abertos</option>
+              <option value="closed">Fechados</option>
+            </select>
+            <input id="ticketSearch" placeholder="🔎 Buscar por usuário, categoria..." />
+          </div>
+        </div>
+        <div class="table-wrapper">
+          <table id="ticketsTable">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Status</th>
+                <th>Categoria</th>
+                <th>Usuário</th>
+                <th>Atendente</th>
+                <th>Avaliação</th>
+                <th>Criado em</th>
+                <th>Motivo</th>
+              </tr>
+            </thead>
+            <tbody id="ticketsTbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Config Tab -->
+      <div id="tab-config" class="tab">
+        <div class="page-header"><h2>⚙️ Configurações</h2></div>
+        <div class="card config-card">
+          <form id="settingsForm">
+            <div class="form-grid">
+              <div class="field">
+                <label>📢 Canal do Painel (ID)</label>
+                <input name="panel_channel_id" placeholder="ID do canal"/>
+              </div>
+              <div class="field">
+                <label>📁 Categoria dos Tickets (ID)</label>
+                <input name="ticket_category_id" placeholder="ID da categoria"/>
+              </div>
+              <div class="field">
+                <label>🛡️ Cargo Staff (ID)</label>
+                <input name="staff_role_id" placeholder="ID do cargo"/>
+              </div>
+              <div class="field">
+                <label>📋 Canal de Logs (ID)</label>
+                <input name="log_channel_id" placeholder="ID do canal"/>
+              </div>
+              <div class="field">
+                <label>⏱️ Auto Close (minutos)</label>
+                <input name="auto_close_minutes" type="number" min="1" placeholder="35"/>
+              </div>
+              <div class="field">
+                <label>🏷️ Nome do Sistema</label>
+                <input name="dashboard_name" placeholder="Orynthium Atrium: Tickets"/>
+              </div>
+            </div>
+            <div class="field checkbox-field">
+              <label>
+                <input name="transcripts_enabled" type="checkbox"/>
+                📄 Transcripts habilitados
+              </label>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn-primary">💾 Salvar Configurações</button>
+              <span id="saveStatus" class="save-status"></span>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Audit Tab -->
+      <div id="tab-audit" class="tab">
+        <div class="page-header">
+          <h2>📋 Audit Log</h2>
+          <button class="btn-refresh" id="refreshAuditBtn">🔄 Atualizar</button>
+        </div>
+        <div class="audit-list" id="auditList"></div>
+      </div>
+    </main>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

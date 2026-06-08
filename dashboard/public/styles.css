@@ -1,0 +1,119 @@
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d0f14;
+  --surface:#161920;
+  --surface2:#1e2130;
+  --border:#2a2d3d;
+  --accent:#5865f2;
+  --accent2:#7289da;
+  --green:#43b581;
+  --red:#f04747;
+  --yellow:#faa61a;
+  --text:#dcddde;
+  --muted:#72767d;
+  --font:-apple-system,'Segoe UI',Arial,sans-serif;
+}
+body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:14px;min-height:100vh;overflow-x:hidden}
+
+.bg-grid{position:fixed;inset:0;background-image:linear-gradient(rgba(88,101,242,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(88,101,242,.04) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0}
+
+/* ── Login ──────────────────────────────────────────────────── */
+.login-screen{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:10;background:var(--bg)}
+.login-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:40px 36px;width:100%;max-width:400px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.login-banner{width:100%;border-radius:10px;margin-bottom:20px;display:block}
+.login-logo{font-size:48px;margin-bottom:12px}
+.login-card h1{font-size:24px;color:#fff;margin-bottom:6px}
+.login-card>p{color:var(--muted);margin-bottom:28px}
+.field{text-align:left;margin-bottom:16px}
+.field label{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
+.field input,.field select{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--text);font-size:14px;outline:none;transition:border .2s}
+.field input:focus,.field select:focus{border-color:var(--accent)}
+.btn-primary{width:100%;background:var(--accent);color:#fff;border:none;border-radius:8px;padding:12px;font-size:15px;font-weight:600;cursor:pointer;transition:background .2s;margin-top:4px}
+.btn-primary:hover{background:var(--accent2)}
+.error-msg{color:var(--red);margin-top:10px;font-size:13px}
+
+/* ── Layout ─────────────────────────────────────────────────── */
+#app{display:flex;min-height:100vh;position:relative;z-index:1}
+
+/* ── Sidebar ─────────────────────────────────────────────────── */
+.sidebar{width:220px;min-width:220px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;padding:0}
+.sidebar-header{display:flex;align-items:center;gap:12px;padding:20px 16px 16px;border-bottom:1px solid var(--border)}
+.logo{font-size:28px}
+.sidebar-title{font-weight:700;color:#fff;font-size:15px}
+.sidebar-sub{font-size:11px;color:var(--muted)}
+nav{padding:12px 8px;flex:1;display:flex;flex-direction:column;gap:2px}
+.nav-item{display:flex;align-items:center;gap:8px;background:transparent;border:none;color:var(--muted);padding:10px 12px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;text-align:left;width:100%;transition:all .15s}
+.nav-item:hover{background:var(--surface2);color:var(--text)}
+.nav-item.active{background:rgba(88,101,242,.2);color:var(--accent)}
+.sidebar-guild{padding:16px;border-top:1px solid var(--border)}
+.guild-name{font-weight:600;color:var(--text);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.guild-id{font-size:11px;color:var(--muted);font-family:monospace;margin-top:2px}
+.btn-logout{margin-top:10px;width:100%;background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:6px;padding:7px;cursor:pointer;font-size:12px;transition:all .15s}
+.btn-logout:hover{border-color:var(--red);color:var(--red)}
+
+/* ── Main ────────────────────────────────────────────────────── */
+.main-content{flex:1;padding:28px;overflow-y:auto;max-height:100vh}
+.page-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px}
+.page-header h2{font-size:20px;color:#fff;font-weight:700}
+.btn-refresh{background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:8px 14px;cursor:pointer;font-size:13px;transition:all .15s}
+.btn-refresh:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ── Tabs ────────────────────────────────────────────────────── */
+.tab{display:none}
+.tab.active{display:block}
+
+/* ── Stats Grid ──────────────────────────────────────────────── */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;margin-bottom:24px}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 16px;text-align:center}
+.stat-num{font-size:32px;font-weight:700;color:#fff}
+.stat-label{font-size:12px;color:var(--muted);margin-top:4px;text-transform:uppercase;letter-spacing:.5px}
+.stat-card.green .stat-num{color:var(--green)}
+.stat-card.red .stat-num{color:var(--red)}
+.stat-card.yellow .stat-num{color:var(--yellow)}
+.stat-card.blue .stat-num{color:var(--accent)}
+
+.cards-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:700px){.cards-row{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px}
+.card h3{font-size:14px;font-weight:600;color:var(--muted);margin-bottom:14px;text-transform:uppercase;letter-spacing:.5px}
+.category-list,.staff-list{display:flex;flex-direction:column;gap:8px}
+.cat-row,.staff-row{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;background:var(--surface2);border-radius:8px;font-size:13px}
+.cat-badge,.staff-badge{background:rgba(88,101,242,.2);color:var(--accent);border-radius:6px;padding:3px 10px;font-weight:700;font-size:13px}
+
+/* ── Table ───────────────────────────────────────────────────── */
+.filter-row{display:flex;gap:10px}
+.filter-row select,.filter-row input{background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:8px 12px;font-size:13px;outline:none}
+.filter-row select:focus,.filter-row input:focus{border-color:var(--accent)}
+.filter-row input{min-width:220px}
+.table-wrapper{overflow-x:auto;border-radius:12px;border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;background:var(--surface)}
+thead th{padding:12px 14px;text-align:left;font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)}
+tbody tr{border-bottom:1px solid var(--border);transition:background .1s}
+tbody tr:last-child{border-bottom:none}
+tbody tr:hover{background:var(--surface2)}
+tbody td{padding:11px 14px;font-size:13px;color:var(--text)}
+.badge{display:inline-block;border-radius:5px;padding:3px 8px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.4px}
+.badge-open{background:rgba(67,181,129,.15);color:var(--green)}
+.badge-closed{background:rgba(114,118,125,.15);color:var(--muted)}
+.id-chip{font-family:monospace;font-size:11px;background:var(--surface2);border-radius:4px;padding:2px 6px;color:var(--muted)}
+.rating-stars{color:var(--yellow)}
+.close-reason{max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted)}
+
+/* ── Config ──────────────────────────────────────────────────── */
+.config-card{padding:24px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+@media(max-width:600px){.form-grid{grid-template-columns:1fr}}
+.checkbox-field label{display:flex;align-items:center;gap:8px;cursor:pointer;font-size:14px;color:var(--text)}
+.checkbox-field input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent)}
+.form-actions{display:flex;align-items:center;gap:16px;margin-top:20px}
+.form-actions .btn-primary{width:auto;padding:10px 24px}
+.save-status{font-size:13px;color:var(--green)}
+
+/* ── Audit ───────────────────────────────────────────────────── */
+.audit-list{display:flex;flex-direction:column;gap:6px}
+.audit-item{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.audit-action{font-weight:600;color:var(--text);font-size:13px}
+.audit-details{color:var(--muted);font-size:12px;font-family:monospace;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.audit-user{color:var(--accent2);font-size:12px}
+.audit-time{color:var(--muted);font-size:11px;white-space:nowrap}
+.empty-state{text-align:center;color:var(--muted);padding:60px 20px;font-size:15px}
